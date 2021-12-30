@@ -1,11 +1,25 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import {BrowserRouter, Routes, Route } from 'react-router-dom';
+
+import Navbar from './Navbar';
+import PersonalLogin from './PersonalLogin';
+import PersonalPage from './PersonalPage';
+import GeneralSpotifyHistory from './GeneralSpotifyHistory';
+import PersonalGraph from './PersonalGraph';
+import AboutPage from './AboutPage';
 
 function App() {
   return (
     <div className="App">
-      YO
+      <Navbar />
+      <BrowserRouter>
+      <Routes>
+      <Route path="/" element={<><PersonalLogin/><GeneralSpotifyHistory/></>}/>
+      <Route path="profile" element={<><PersonalPage/><PersonalGraph/></>}></Route>
+      <Route path="about" element={<AboutPage />}></Route>
+      </Routes>
+    </BrowserRouter>
     </div>
   );
 }

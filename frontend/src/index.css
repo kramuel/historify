@@ -1,8 +1,11 @@
+@font-face {
+  font-family: "standardFont";
+  src: url("/fonts/Roboto-Regular.ttf");
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: 'standardFont', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -10,4 +13,161 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+/* Navbar CSS */
+
+.navbar {
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  margin: auto;
+  background-color:#C0C8BF;
+  border-bottom: 1px solid #f2f2f2;
+}
+
+.navbar div {
+  margin: auto;
+  display: inline-block;
+}
+
+.navbar a {
+  font-size: 12px;
+  margin-left: 16px;
+  margin: 32px;
+  text-decoration: none;
+  padding: 10px 32px;
+  background-color: #95EE93;
+  border-radius: 4px;
+  background: linear-gradient(to left, #FAF6F6 50%, black 50%) right;
+  background-size: 200%;
+  transition: .2s ease-out;
+}
+.navbar a:hover {
+  color: #95EE93;
+  background-color: black;
+  background-position: left;
+}
+
+.SpotifyLoginButton{
+  font-size: 12px;
+  margin-right: 16px;
+  text-decoration: none;
+  padding: 10px 32px;
+  border-radius: 10px;
+  border: none;
+  color: black;
+  background: linear-gradient(to left, #95EE93 50%, black 50%) right;
+  background-size: 200%;
+  transition: .2s ease-out;
+}
+
+.SpotifyLoginButton:hover {
+  color: #95EE93;
+  background-color: black;
+  background-position: left;
+}
+
+/* Personal Login CSS */
+
+.PersonalLoginBox {
+  margin: 20px;
+  align-items: center;
+  padding: 50px;
+  background-size: 5%;
+}
+
+.PersonalLoginArrowIcon{
+  display: inline-block;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s 0.2s, opacity 0.2s linear;
+  padding-left: 10px;
+}
+
+.PersonaolLoginSpotifyIcon{
+  width: 42px;
+  height: 42px;
+  padding-right: 10px;
+}
+
+.PersonalLoginTextCapsule{
+  display: inline-block;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s 0.2s, opacity 0.2s linear;
+}
+
+.PersonalLoginLink {
+  text-decoration: none;
+  color:black;
+  background-size: 200%;
+  transition: .6s ease-out;
+  font-size: 58px;
+}
+
+.PersonalLoginBoxCapsule{
+  background: linear-gradient(to left, #FAF6F6 50%, black 50%) right;
+  background-size: 200%;
+  transition: .6s ease-out;
+  margin: 20px;
+}
+
+.PersonalLoginBoxCapsule:hover{
+  background-position: left;
+}
+
+.PersonalLoginBoxCapsule:hover .PersonalLoginBox{
+  color:#95EE93;
+  background-position: right;
+}
+
+.PersonalLoginBoxCapsule:hover .PersonalLoginLink{
+  color:#95EE93;
+  background-position: right;
+}
+
+.PersonalLoginBoxCapsule:hover .PersonalLoginArrowIcon{
+  visibility: visible;
+  opacity: 1;
+  transition: opacity 0.5s linear;
+}
+
+.PersonalLoginBoxCapsule:hover .PersonalLoginTextCapsule{
+  visibility: visible;
+  opacity: 1;
+  transition: opacity 0.5s linear;
+}
+
+/* GeneralSpotifyHistory CSS */
+
+.GeneralSpotifyHistoryBox{
+  font-size: 32px;
+  background-color: #FAF6F6;
+  margin: 20px;
+  align-items: center;
+  padding: 15px;
+}
+
+.GeneralSpotifyContentCapsule{
+  width: 100%;
+  font-size: 16px;
+}
+
+.GeneralSpotifyImageBox{
+  display: inline-block;
+  margin: 3% 5%;
+  transition: transform .2s;
+}
+
+.GeneralSpotifyImageBox:hover {
+  color: #95EE93;
+  background-color: black;
+  box-shadow: 6px 6px #95EE93;
+  transform: scale(1.1);
+}
+
+.GeneralSpotifyImage{
+  width: 214px;
+  height: 214px;
 }
