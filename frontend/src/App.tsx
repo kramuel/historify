@@ -1,22 +1,27 @@
-import React, { useState } from 'react'
+import React from 'react';
+import './App.css';
+import {BrowserRouter, Routes, Route } from 'react-router-dom';
 
-const apiHost = process.env.REACT_APP_API_HOST
+import Navbar from './Navbar';
+import PersonalLogin from './PersonalLogin';
+import PersonalPage from './PersonalPage';
+import GeneralSpotifyHistory from './GeneralSpotifyHistory';
+// import PersonalGraph from './PersonalGraph';
+import AboutPage from './AboutPage';
 
-export default function App() {
- const [now, setNow] = useState()
-
- async function onClick() {
-  const res = await fetch(`${apiHost}/now`)
-  const json = await res.json()
-  setNow(json)
- }
-
-
- return <div>
-  <button onClick={onClick}>Present</button>
-  {now && <p>{now}</p>}
-  <div>
-   hello
- </div>
- </div>
+function App() {
+  return (
+    <div className="App">
+      <Navbar />
+      <BrowserRouter>
+      <Routes>
+      <Route path="/" element={<><PersonalLogin/><GeneralSpotifyHistory/></>}/>
+      <Route path="profile" element={<><PersonalPage/></>}></Route>
+      <Route path="about" element={<AboutPage />}></Route>
+      </Routes>
+    </BrowserRouter>
+    </div>
+  );
 }
+
+export default App;
