@@ -1,0 +1,47 @@
+version: "3.8"
+services:
+  db:
+    image: postgres:12.9
+    environment:
+      - POSTGRES_USER=$DB_USER
+      - POSTGRES_PASSWORD=$DB_PASSWORD
+      - POSTGRES_DB=$DB_NAME
+    ports:
+      - $DB_PORT:$DB_PORT
+    volumes: 
+      - ./db/data:/var/lib/postgresql/data
+    # mounts a named volume from the containers internal PostgreSQL data dir to the local machine
+    # so that data remains between container restarts
+    restart: always # force restart the container each time it's spun up (see psql-docker docs)
+    command: -p $DB_PORT
+
+  backend:
+    depends_on:
+      - db
+    build: ./backend
+    environment:
+      - NODE_ENV=$API_NODE_ENV
+      - PORT=$API_PORT
+      - PGHOST=db
+      - PGPORT=$DB_PORT
+      - PGUSER=$DB_USER
+      - PGPASSWORD=$DB_PASSWORD
+      - PGDATABASE=$DB_NAME
+    ports:
+      - $API_PORT:$API_PORT
+    volumes:
+      - ./backend:/backend
+      - /backend/node_modules
+
+  frontend:
+    build: ./frontend
+    environment:
+      - NODE_ENV=$UI_NODE_ENV
+      - PORT=$UI_PORT
+      - REACT_APP_API_HOST
+    ports:
+      - $UI_PORT:$UI_PORT
+    volumes:
+      - ./frontend:/frontend
+      - /frontend/node_modules
+    stdin_open: true
