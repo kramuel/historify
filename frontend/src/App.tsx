@@ -1,13 +1,22 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react'
 
-function App() {
-  return (
-    <div className="App">
-      YO
-    </div>
-  );
+const apiHost = process.env.REACT_APP_API_HOST
+
+export default function App() {
+ const [now, setNow] = useState()
+
+ async function onClick() {
+  const res = await fetch(`${apiHost}/now`)
+  const json = await res.json()
+  setNow(json)
+ }
+
+
+ return <div>
+  <button onClick={onClick}>Present</button>
+  {now && <p>{now}</p>}
+  <div>
+   hello
+ </div>
+ </div>
 }
-
-export default App;
