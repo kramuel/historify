@@ -6,7 +6,7 @@ import Navbar from './Navbar';
 import PersonalLogin from './PersonalLogin';
 import PersonalPage from './PersonalPage';
 import GeneralSpotifyHistory from './GeneralSpotifyHistory';
-import PersonalGraph from './PersonalGraph';
+// import PersonalGraph from './PersonalGraph';
 import AboutPage from './AboutPage';
 
 function App() {
@@ -16,7 +16,7 @@ function App() {
       <BrowserRouter>
       <Routes>
       <Route path="/" element={<><PersonalLogin/><GeneralSpotifyHistory/></>}/>
-      <Route path="profile" element={<><PersonalPage/><PersonalGraph/></>}></Route>
+      <Route path="profile" element={<><PersonalPage/></>}></Route>
       <Route path="about" element={<AboutPage />}></Route>
       </Routes>
     </BrowserRouter>

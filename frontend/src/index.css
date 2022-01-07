@@ -171,3 +171,40 @@ code {
   width: 324px;
   height: auto;
 }
+
+/* GraphBox */
+
+.GraphBox{
+  font-size: 14px;
+  background-color: #FAF6F6;
+  padding: 15px;
+  margin-bottom: 20px;
+  float:right;
+  margin-right: -15px;
+}
+
+#GraphText{
+  font-size: 22px;
+}
+
+.PersonalGraphCapsule{
+  font-size: 32px;
+  background-color: #FAF6F6;
+  margin: 20px;
+  align-items: center;
+  padding: 15px;
+}
+
+.GraphList{
+  align-items: center;
+  padding: 20px;
+}
+
+.GraphList li{
+  text-align: left;
+  padding: 12px;
+}
+
+.GraphList h3{
+  text-decoration: underline;
+}
