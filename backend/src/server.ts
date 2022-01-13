@@ -7,6 +7,8 @@ import fetch from 'cross-fetch'
 import { URLSearchParams } from 'url';
 import cookieParser from 'cookie-parser';
 
+
+
 dotenv.config({ path: '/home/kramuel/Projects/historify/.env' })
 
 const port = parseInt(process.env.PORT) || parseInt(process.env.API_PORT)
@@ -21,6 +23,7 @@ const pool = new Pool()
 
 
 const stateKey = 'spotify_auth_state';
+
 
 
 app.get('/now', async (req: Request, res: Response) => {
