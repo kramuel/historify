@@ -6,7 +6,6 @@ import Navbar from './Navbar';
 import PersonalLogin from './PersonalLogin';
 import PersonalPage from './PersonalPage';
 import GeneralSpotifyHistory from './GeneralSpotifyHistory';
-// import PersonalGraph from './PersonalGraph';
 import AboutPage from './AboutPage';
 
 function App() {
