@@ -24,6 +24,7 @@ code {
   margin: auto;
   background-color:#C0C8BF;
   border-bottom: 1px solid #f2f2f2;
+  
 }
 
 .navbar div {
@@ -51,7 +52,7 @@ code {
 
 .SpotifyLoginButton{
   font-size: 14px;
-  margin-right: 16px;
+  margin-right: 32px;
   text-decoration: none;
   padding: 10px 32px;
   border-radius: 10px;
@@ -191,7 +192,7 @@ code {
 .PersonalGraphCapsule{
   font-size: 32px;
   background-color: #FAF6F6;
-  margin: 20px;
+  margin: 15px;
   align-items: center;
   padding: 15px;
 }
@@ -201,27 +202,104 @@ code {
   padding: 20px;
 }
 
-.GraphList li{
-  text-align: left;
-  padding: 12px;
+.GraphListButton{
+  font-size: 14px;
+  margin-right: 8px;
+  margin-top: 10px;
+  text-decoration: none;
+  padding: 10px 32px;
+  border-radius: 10px;
+  border: none;
+  color: black;
+  background: linear-gradient(to left, #95EE93 50%, #141414 50%) right;
+  background-size: 200%;
+  transition: .2s ease-out;
+}
+
+.GraphListButton:hover {
+  color: #95EE93;
+  background-color: #141414;
+  background-position: left;
+}
+
+.GraphListButton:focus {
+  color: #95EE93;
+  background-color: #141414;
+  background-position: left;
+}
+
+.GraphListButtonSelected{
+  color: #95EE93;
+  background-color: #141414;
+  font-size: 14px;
+  margin-right: 8px;
+  margin-top: 10px;
+  text-decoration: none;
+  padding: 10px 32px;
+  border-radius: 10px;
+  border: none;
 }
 
 .GraphList h3{
   text-decoration: underline;
+  display: inline-block;
 }
 
 .ArtistList {
-  width: 50%;
+  width: 80vh;
   list-style-type: none;
-  margin: 10px;
-  padding: 15px;
-  text-align: left;
+  margin-left: 5vh;
+  margin: 15px;
+  text-align: center;
   border-style: solid;
   border-radius: 4px;
   }
 
-.ArtistList img{
-  width: 70px;
-  height: 70px;
-  padding-bottom: -10px;
+.TimeTermButtons{
+  margin-top: 5px;
+}
+
+.imageDivBox{
+  display: inline-block;
+  margin: 25px;
+  transition: transform .2s;
+  word-break: break-word;
+  width: 240px;
+}
+
+.imageDivBox:hover {
+  color: #95EE93;
+  background-color: #141414;
+  box-shadow: 6px 6px #95EE93;
+  transform: scale(1.1);
+}
+
+.imageDiv{
+  width: 240px;
+  height: 240px;
+}
+
+.imageBoxCapsule{
+  width: 100%;
+  font-size: 20px;
+  display: inline-block;
+}
+
+.ChangeDataButton{
+  display: inline-block;
+  margin: 4vh;
+  width: 32vh;
+  height: 20vh;
+  color: #FAF6F6;
+  font-size: 300%;
+  transition: transform .2s;
+  background-image: url(https://i.scdn.co/image/ab67616d0000b273e31a279d267f3b3d8912e6f1);
+
+}
+
+.ChangeDataButton:hover {
+  color: #95EE93;
+  background-color: #141414;
+  box-shadow: 6px 6px #95EE93;
+  transform: scale(1.1);
 }

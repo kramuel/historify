@@ -7,6 +7,8 @@ import fetch from 'cross-fetch'
 import { URLSearchParams } from 'url';
 import cookieParser from 'cookie-parser';
 
+
+
 dotenv.config({ path: '/home/kramuel/Projects/historify/.env' })
 
 const port = parseInt(process.env.PORT) || parseInt(process.env.API_PORT)
@@ -21,6 +23,7 @@ const pool = new Pool()
 
 
 const stateKey = 'spotify_auth_state';
+
 
 
 app.get('/now', async (req: Request, res: Response) => {
@@ -90,27 +93,30 @@ app.get('/callback', function (req: Request, res: Response) {
                 const access_token = data.access_token
                 const refresh_token = data.refresh_token
 
-                const params = new URLSearchParams()
-                params.append('time_range', 'short_term')
-                params.append('limit', '5')
-                params.append('offset', '0')
+                // what does the '?' do
+                res.redirect('http://localhost:3005/profile?'+ new URLSearchParams({'access_token': access_token, 'refresh_token': refresh_token}))
 
-                fetch('https://api.spotify.com/v1/me/top/artists?' + params,
-                    {
-                        headers: {
-                            'Authorization': 'Bearer ' + access_token
-                        }
-                    })
-                    .then(res => res.json())
-                    .then(data => {
-                        const items = data.items
-                        let index = 1
-                        items.forEach(element => {
-                            console.log(index, ' ', element.name)
-                            index++
-                        });
-                    })
-                    .catch(err => console.error(err))
+                // const params = new URLSearchParams()
+                // params.append('time_range', 'short_term')
+                // params.append('limit', '5')
+                // params.append('offset', '0')
+
+                // fetch('https://api.spotify.com/v1/me/top/artists?' + params,
+                //     {
+                //         headers: {
+                //             'Authorization': 'Bearer ' + access_token
+                //         }
+                //     })
+                //     .then(res => res.json())
+                //     .then(data => {
+                //         const items = data.items
+                //         let index = 1
+                //         items.forEach(element => {
+                //             console.log(index, ' ', element.name)
+                //             index++
+                //         });
+                //     })
+                //     .catch(err => console.error(err))
 
             })
             .catch((err) => {
