@@ -7,17 +7,18 @@ interface Props{
     timePeriodRange: TimePeriod
 }
 
-const GetTracks = ({rangeTerm, timePeriodRange}: Props) => {
+
+
+const GetPublicPlaylist = () => {
     const [searchParams, setSearchParams] = useSearchParams()
     const [query, setQuery] = useState(searchParams.get("access_token"))
     const [artistList, setArtistList] = useState<Track[]>([])
     useEffect(() => {
         const params = new URLSearchParams()
-        params.append('time_range', rangeTerm)
-        params.append('limit', '25')
+        params.append('limit', '50')
         params.append('offset', '0')
 
-        fetch('https://api.spotify.com/v1/me/top/tracks?' + params,
+        fetch('https://api.spotify.com/v1/playlists/37i9dQZEVXbLoATJ81JYXz/tracks?' + params,
             {
                 headers: {
                     'Authorization': 'Bearer ' + query
@@ -29,14 +30,14 @@ const GetTracks = ({rangeTerm, timePeriodRange}: Props) => {
                 console.log(data)
                 const toptracks = data.items
                 let count = 1
-                toptracks.forEach((artist: any) => {
+                toptracks.forEach((item: any) => {
                     let newArtist: Track = {
-                        name: artist.name,
-                        image: artist.album.images[1].url,
+                        name: item.track.name,
+                        image: item.track.album.images[0].url,
                         index: count,
                         imageSize: 320,
-                        artistname: artist.artists[0].name,
-                        link: artist.href
+                        artistname: item.track.artists[0].name,
+                        link: item.track.external_urls.spotify
                     }
                     newArtistList.push(newArtist)
                     count++
@@ -45,16 +46,16 @@ const GetTracks = ({rangeTerm, timePeriodRange}: Props) => {
                 setArtistList(newArtistList)
             })
             .catch(err => console.error(err))
-    }, [rangeTerm]
+    }, []
     )
     return(
     <div className="PersonalGraphCapsule">
                 <div className="GraphList">
-                    <h3>Your Top Tracks {timePeriodRange}</h3>
+                    <h3>Sweden's Top Tracks </h3>
                     <div className="imageBoxCapsule">
                     {artistList.map((artist, index) => {
                         return (
-                            <div key={index} className="imageDivBox"> <p>{index + 1}. {artist.name} - {artist.artistname}</p><img className='imageDiv' src={artist.image} /></div>
+                            <div key={index} className="imageDivBox" onClick={()=> window.open(artist.link + "?si=8f0fefabbde14156", "_blank")}> <p>{index + 1}. {artist.name} - {artist.artistname}</p><img className='imageDiv' src={artist.image} /></div>
                         )
                     })}
                 </div>
@@ -63,4 +64,4 @@ const GetTracks = ({rangeTerm, timePeriodRange}: Props) => {
      )
 }
 
-export default GetTracks;
+export default GetPublicPlaylist;

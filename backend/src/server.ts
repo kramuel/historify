@@ -38,7 +38,7 @@ app.get('/now', async (req: Request, res: Response) => {
 app.get('/login', function (req: Request, res: Response) {
 
     const state: string = generateRandomString(16);
-    const scope: string = 'user-top-read';
+    const scope: string = 'user-top-read playlist-read-private';
     res.cookie(stateKey, state);
 
     const params = new URLSearchParams()
@@ -94,7 +94,7 @@ app.get('/callback', function (req: Request, res: Response) {
                 const refresh_token = data.refresh_token
 
                 // what does the '?' do
-                res.redirect('http://localhost:3005/profile?'+ new URLSearchParams({'access_token': access_token, 'refresh_token': refresh_token}))
+                res.redirect('http://localhost:3005/homepage?'+ new URLSearchParams({'access_token': access_token, 'refresh_token': refresh_token}))
 
                 // const params = new URLSearchParams()
                 // params.append('time_range', 'short_term')

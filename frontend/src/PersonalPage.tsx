@@ -9,6 +9,7 @@ export interface Artist {
     index: number
     image: string
     imageSize: number
+    link: string
 }
 
 export interface Track {
@@ -17,6 +18,7 @@ export interface Track {
     image: string
     imageSize: number
     artistname: string
+    link: string
 }
 
 export enum TimeTerm{
@@ -58,7 +60,7 @@ const PersonalPage = () => {
             <h3>Erik's Spotify History</h3>
             <div className="GeneralSpotifyContentCapsule">
                 <button className="ChangeDataButton" onClick={() => {setShowArtists(true); setShowTracks(false)}}>SHOW ARTISTS</button>
-                <button className="ChangeDataButton" onClick={() => {setShowArtists(false); setShowTracks(true)}}>SHOW TRACKS</button>
+                <button id='knapp2' className="ChangeDataButton" onClick={() => {setShowArtists(false); setShowTracks(true)}}>SHOW TRACKS</button>
             </div>
             <div className="TimeTermButtons">
                 <button className={selectedButton===1 ? "GraphListButtonSelected" : "GraphListButton"} onClick={() => OnClickHandler(TimeTerm.SHORT_TERM, TimePeriod.SHORT_TERM)}>Last Month</button>

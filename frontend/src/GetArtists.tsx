@@ -34,7 +34,8 @@ const GetArtists = ({rangeTerm, timePeriodRange}: Props) => {
                         name: artist.name,
                         image: artist.images[1].url,
                         index: count,
-                        imageSize: 320
+                        imageSize: 320,
+                        link: artist.href
                     }
                     newArtistList.push(newArtist)
                     count++
