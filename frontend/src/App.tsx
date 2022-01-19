@@ -9,7 +9,7 @@ import GeneralSpotifyHistory from './GeneralSpotifyHistory';
 import AboutPage from './AboutPage';
 
 function App() {
-  const backendLoginRoute = 'http://localhost:5005/login' // dev -> use nginx for production???
+  const backendLoginRoute = 'http://localhost:5005/auth/login' // dev -> use nginx for production???
   //if not alreadty logged in check etc
   // ( now PersonalLogin component acts as loginbutton, doesnt check if we are already logged in )
 

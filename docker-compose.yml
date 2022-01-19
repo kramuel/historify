@@ -1,7 +1,7 @@
 version: "3.8"
 services:
   db:
-    image: postgres:12.9
+    build: ./db
     environment:
       - POSTGRES_USER=$DB_USER
       - POSTGRES_PASSWORD=$DB_PASSWORD
@@ -21,7 +21,7 @@ services:
     build: ./backend
     environment:
       - NODE_ENV=$API_NODE_ENV
-      - PORT=$API_PORT
+      - API_PORT=$API_PORT
       - PGHOST=db
       - PGPORT=$DB_PORT
       - PGUSER=$DB_USER
@@ -29,6 +29,9 @@ services:
       - PGDATABASE=$DB_NAME
       - SPOTIFY_CLIENT_ID=$SPOTIFY_CLIENT_ID
       - SPOTIFY_CLIENT_SECRET=$SPOTIFY_CLIENT_SECRET
+      - COOKIE_SECRET=$COOKIE_SECRET
+      # check these and remove unecessary since i init pg in db.ts
+      # use env file instead + use env.prod when production
     ports:
       - $API_PORT:$API_PORT
     volumes:

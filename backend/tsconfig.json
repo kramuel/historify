@@ -1,9 +1,13 @@
 {
-    "compilerOptions": {
-      "module": "commonjs",
-      "target": "es6",
-      "rootDir": "src/",
-      "esModuleInterop": true,
-      "outDir": "build/"
-    }
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es2019",
+    "rootDir": "src/",
+    "esModuleInterop": true,
+    "outDir": "build/",
+    "typeRoots": [
+      ".src/types",
+      "./node_modules/@types"
+    ]
   }
+}
