@@ -6,7 +6,7 @@ const Navbar = ({loginRoute}: Props) => {
     return (
       <nav className="navbar">
         <div className="links">
-          <a href="/">Homepage</a>
+          <a href="/homepage">Homepage</a>
           <a href="profile">My Profile</a>
           <a href="about">About</a>
         </div>
