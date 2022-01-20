@@ -1,11 +1,11 @@
-// src/users/user.interface.ts
+// src/auth/user.interface.ts
 
-export interface BaseUser {
-    username: string;
-    token: string;
-    currentTopArtist: string // Artist[]
-}
+// export interface BaseUser {
+//     username: string;
+//     token: string;
+//     currentTopArtist: string // Artist[]
+// }
 
-export interface User extends BaseUser {
-    id: number
-}
+// export interface User extends BaseUser {
+//     id: number
+// }

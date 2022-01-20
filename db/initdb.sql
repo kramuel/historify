@@ -21,7 +21,7 @@ CREATE TABLE IF NOT EXISTS users (
 -- Creates artists table
 CREATE TABLE IF NOT EXISTS artists (
     artist_id INT NOT NULL PRIMARY KEY GENERATED ALWAYS AS IDENTITY
-    , artist_name varchar(50) NOT NULL
+    , artist_name varchar(100) NOT NULL
     , rank smallint NOT NULL
     , image_url varchar(100) NULL 
     , link varchar(100) NULL
@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS artists (
     , CONSTRAINT fk_user 
         FOREIGN KEY(user_id) 
             REFERENCES users(user_id)
-            ON DELETE CASCADE
+    --, UNIQUE(user_id, rank)
     -- , week smallint NULL
     
 );
@@ -37,13 +37,27 @@ CREATE TABLE IF NOT EXISTS artists (
 -- Creates tracks table
 CREATE TABLE IF NOT EXISTS tracks (
     track_id INT NOT NULL PRIMARY KEY GENERATED ALWAYS AS IDENTITY
-    , artist_name varchar(50) NOT NULL
-    , track_name varchar(50) NOT NULL
+    , artist_name varchar(100) NOT NULL
+    , track_name varchar(100) NOT NULL
     , rank smallint NOT NULL
     , image_url varchar(100) NULL 
     , link varchar(100) NULL
     , user_id INT
     , CONSTRAINT fk_user FOREIGN KEY(user_id) REFERENCES users(user_id)
+    -- , UNIQUE(user_id, rank)
     -- , week smallint NULL
 );
 
+-- if rank and user id same == replace ( users only have 25 records each )
+-- if we would have had weeks -> also check time and if next week add 
+-- (but then the whole this comes with access_tokens, keep refreshing? ...no)
+
+-- INSERT INTO artists (artist_name, rank, image_url, link, user_id) 
+--     VALUES ($1, $2, $3, $4, $5)
+--     ON CONFLICT (artist_name, rank, image_url, link, user_id) DO NOTHING
+--     ON CONFLICT (rank, user_id) DO UPDATE
+--     SET artist_name = $1, image_url = $3, link = $4
+-- 
+-- !!! maybe needs artist_name = EXCLUDED.artist_name
+
+-- psql -h 0.0.0.0 -p 5435 -d historify_postgres -U mrbean < db/initdb.sql

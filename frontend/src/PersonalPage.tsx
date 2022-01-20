@@ -346,10 +346,6 @@ const PersonalPage = () => {
     }
 
     useEffect(() => {
-        const params = new URLSearchParams()
-        params.append('time_range', 'short_term')
-        params.append('limit', '5')
-        params.append('offset', '0')
 
         fetch('http://localhost:5005/artists/', {
             credentials: 'include'
@@ -368,40 +364,10 @@ const PersonalPage = () => {
                     newArtistList.push(newArtist)
                     })
 
-                setArtistList(newArtistList)
-                
+                setArtistList(newArtistList)                
 
             })
             .catch(err => console.error(err))
-
-        // fetch('https://api.spotify.com/v1/me/top/artists?' + params,
-        //     {
-        //         headers: {
-        //             'Authorization': 'Bearer ' + query
-        //         }
-        //     })
-        //     .then(res => res.json())
-        //     .then(data => {
-        //         let newArtistList: Artist[] = []
-        //         console.log(data)
-        //         const topartist = data.items
-
-
-        //         let count = 1
-        //         topartist.forEach((artist: any) => {
-        //             let newArtist: Artist = {
-        //                 name: artist.name,
-        //                 image: artist.images[1].url,
-        //                 index: count,
-        //                 imageSize: 320
-        //             }
-        //             newArtistList.push(newArtist)
-        //             count++
-        //         });
-
-        //         setArtistList(newArtistList)
-        //     })
-        //     .catch(err => console.error(err))
     }, []
     )
 
