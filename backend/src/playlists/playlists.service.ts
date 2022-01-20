@@ -1,25 +1,11 @@
 import { QueryConfig } from "pg"
 import pool from "../db"
 import fetch from "cross-fetch"
+import { SelectCountry } from ".."
 
-const SelectCountry = {
-    SWEDEN: {id: "37i9dQZEVXbLoATJ81JYXz", val: 987987987},
-    GLOBAL: {id: "37i9dQZEVXbMDoHDwVN2tF", val: 123908120},
-    USA: {id: "37i9dQZEVXbLRQDuF5jeBp", val: 145345544},
-    ARGENTINA: {id: "37i9dQZEVXbMMy2roB9myp", val: 878444874}
-}
-
-// export const saveAllPlaylists = async (access_token: string): Promise<void> => {
-
-//     saveSwedenPlaylist(access_token, swe)
-//     saveUSAPlaylist()
-//     saveArgentinaPlaylist()
-//     saveGlobalPlaylist()
-
-// }
 
 export const saveAllPlaylists = async (access_token, playlistCountry) => {
-
+    
     const playlistID: string = SelectCountry[playlistCountry].id
     console.log(playlistID);
     
@@ -72,14 +58,3 @@ export const saveAllPlaylists = async (access_token, playlistCountry) => {
     }
 }
 
-const saveUSAPlaylist = () => {
-
-}
-
-const saveArgentinaPlaylist = () => {
-
-}
-
-const saveGlobalPlaylist = () => {
-
-}

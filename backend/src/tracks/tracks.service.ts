@@ -52,20 +52,4 @@ export const saveAllTracks = async (access_token: string, user_id: number): Prom
     } catch (error) {
         console.error(error);
     }
-    // let count = 1
-    // toptracks.forEach(async (track: any) => {
-    //     const insertQuery: QueryConfig = {
-    //         text: "INSERT INTO tracks (track_name, artist_name, image_url, rank, user_id, link) "
-    //             + "VALUES ($1, $2, $3, $4, $5, $6) "
-    //             + "ON CONFLICT (rank, user_id) DO UPDATE "
-    //             + "SET artist_name = EXCLUDED.artist_name, track_name = EXCLUDED.track_name, image_url=EXCLUDED.image_url, link = EXCLUDED.link",
-    //         values: [track.name, track.artists[0].name, track.album.images[1].url, count, user_id, track.external_urls.spotify]
-    //     }
-    //     try {
-    //         await pool.query(insertQuery)
-    //     } catch (error) {
-    //         console.error(error);
-    //     }
-    //     count++
-    // });
 }

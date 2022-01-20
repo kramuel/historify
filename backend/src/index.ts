@@ -12,6 +12,7 @@ import pool from './db';
 import { authRouter } from './auth/auth.router';
 import { artistsRouter } from './artists/artists.router';
 import { tracksRouter } from './tracks/tracks.router';
+import { playlistsRouter } from './playlists/playlists.router';
 
 /**
  * App Variables
@@ -27,6 +28,13 @@ const secret: string = process.env.COOKIE_SECRET
 const conString: string = `pg://${process.env.DB_USER}:
     ${process.env.DB_PASSWORD}@${process.env.DB_HOST}:
     ${process.env.DB_PORT}/${process.env.DB_NAME}`
+
+export const SelectCountry = {
+    SWEDEN: {id: "37i9dQZEVXbLoATJ81JYXz", val: 987987987},
+    GLOBAL: {id: "37i9dQZEVXbMDoHDwVN2tF", val: 123908120},
+    USA: {id: "37i9dQZEVXbLRQDuF5jeBp", val: 145345544},
+    ARGENTINA: {id: "37i9dQZEVXbMMy2roB9myp", val: 878444874}
+}
 
 /**
  *  App Configuration
@@ -88,6 +96,7 @@ So I wouldn't call it "must-have".
 app.use("/auth", authRouter)
 app.use("/artists", artistsRouter)
 app.use("/tracks", tracksRouter)
+app.use("/playlists", playlistsRouter)
 
 app.listen(PORT, () => {
     console.log(`api listening at http://0.0.0.0:${PORT}`)

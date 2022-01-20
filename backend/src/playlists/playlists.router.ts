@@ -19,10 +19,14 @@ export const playlistsRouter = express.Router();
  * Controller Definitions
  */
 
+playlistsRouter.get("/", (req,res)=>{
+    res.send("hello")
+})
 
 playlistsRouter.get("/:country", async (req: Request, res: Response) => {
     const country = req.params.country
-
+    console.log(country);
+    
     try {
         const { userName } = req.session
         if (!userName) {
@@ -30,14 +34,14 @@ playlistsRouter.get("/:country", async (req: Request, res: Response) => {
         }
 
 
-        const artistQuery: QueryConfig = {
+        const playlistQuery: QueryConfig = {
             text: "SELECT * FROM tracks WHERE user_id = $1",
-            values: [ userResult.rows[0].user_id ]
+            values: [ SelectCountry[country].val ]
         } 
-        const artistResult: QueryResult = await pool.query(artistQuery)
+        const playlistResult: QueryResult = await pool.query(playlistQuery)
         // console.log(artistResult.rows)
 
-        res.status(200).send(artistResult.rows)
+        res.status(200).send(playlistResult.rows)
     } catch (e) {
         res.status(500).send(e.message)
     }

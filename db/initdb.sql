@@ -48,6 +48,8 @@ CREATE TABLE IF NOT EXISTS tracks (
     -- , week smallint NULL
 );
 
+
+
 -- if rank and user id same == replace ( users only have 25 records each )
 -- if we would have had weeks -> also check time and if next week add 
 -- (but then the whole this comes with access_tokens, keep refreshing? ...no)

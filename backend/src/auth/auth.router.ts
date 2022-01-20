@@ -11,7 +11,7 @@ import { getUserId, storeSessionUserName } from "./auth.service";
 
 import { saveAllArtists } from "../artists/artists.service";
 import { saveAllTracks } from "../tracks/tracks.service";
-import { saveAllPlaylist } from "../playlists/playlists.service";
+import { saveAllPlaylists } from "../playlists/playlists.service";
 
 /**
  * Router Definition

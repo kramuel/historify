@@ -52,8 +52,6 @@ export const getUserId = async (access_token: string, refresh_token: string, use
         }
         const userQueryRes: QueryResult = await pool.query(userQuery)
 
-        // console.log("db_user = ", userQueryRes.rows[0])
-
         const user_id: number = await addOrUpdateUserinDB(userQueryRes.rows[0], access_token, refresh_token, user_name)
 
         return user_id
