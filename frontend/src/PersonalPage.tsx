@@ -1,8 +1,8 @@
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import React, { PureComponent, useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import GetArtists from './GetArtists';
 import GetTracks from './GetTracks';
+import GetArtists from './GetArtists';
 
 export interface Artist {
     name: string
