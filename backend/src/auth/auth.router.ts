@@ -11,6 +11,7 @@ import { getUserId, storeSessionUserName } from "./auth.service";
 
 import { saveAllArtists } from "../artists/artists.service";
 import { saveAllTracks } from "../tracks/tracks.service";
+import { saveAllPlaylist } from "../playlists/playlists.service";
 
 /**
  * Router Definition
@@ -107,7 +108,10 @@ authRouter.get('/callback', async function (req: Request, res: Response) {
             // ( these should probably be post reqs)
             await saveAllArtists(access_token, user_id)
             await saveAllTracks(access_token, user_id)
-
+            await saveAllPlaylists(access_token, "SWEDEN")
+            await saveAllPlaylists(access_token, "USA")
+            await saveAllPlaylists(access_token, "ARGENTINA")
+            await saveAllPlaylists(access_token, "GLOBAL")
 
             storeSessionUserName(req, user_name)
             res.redirect("http://localhost:3005/profile")
