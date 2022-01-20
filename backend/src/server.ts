@@ -14,7 +14,7 @@ dotenv.config({ path: '/home/kramuel/Projects/historify/.env' })
 const port = parseInt(process.env.PORT) || parseInt(process.env.API_PORT)
 const client_id = process.env.SPOTIFY_CLIENT_ID
 const client_secret = process.env.SPOTIFY_CLIENT_SECRET
-const redirect_uri = `http://localhost:${port}/callback`
+const redirect_uri = `http://localhost:${port}/auth/callback`
 
 const app = express()
 app.use(cors())
@@ -38,7 +38,7 @@ app.get('/now', async (req: Request, res: Response) => {
 app.get('/login', function (req: Request, res: Response) {
 
     const state: string = generateRandomString(16);
-    const scope: string = 'user-top-read';
+    const scope: string = 'user-top-read playlist-read-private';
     res.cookie(stateKey, state);
 
     const params = new URLSearchParams()
@@ -52,7 +52,7 @@ app.get('/login', function (req: Request, res: Response) {
 });
 
 
-app.get('/callback', function (req: Request, res: Response) {
+app.get('/auth/callback', function (req: Request, res: Response) {
     console.log("callback 1")
     // check req.params.state if equal to random state, if not - >terminate
 

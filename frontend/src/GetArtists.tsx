@@ -34,7 +34,8 @@ const GetArtists = ({rangeTerm, timePeriodRange}: Props) => {
                         name: artist.name,
                         image: artist.images[1].url,
                         index: count,
-                        imageSize: 320
+                        imageSize: 320,
+                        link: artist.external_urls.spotify
                     }
                     newArtistList.push(newArtist)
                     count++
@@ -53,7 +54,7 @@ const GetArtists = ({rangeTerm, timePeriodRange}: Props) => {
                     <div className="imageBoxCapsule">
                     {artistList.map((artist, index) => {
                         return (
-                            <div key={index} className="imageDivBox"> <p>{index + 1}. {artist.name}</p><img className='imageDiv' src={artist.image} /></div>
+                            <div key={index} className="imageDivBox" onClick={()=> window.open(artist.link + "?si=8f0fefabbde14156", "_blank")}> <p>{index + 1}. {artist.name}</p><img className='imageDiv' src={artist.image} /></div>
                         )
                     })}
                 </div>

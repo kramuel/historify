@@ -7,6 +7,7 @@ import PersonalLogin from './PersonalLogin';
 import PersonalPage from './PersonalPage';
 import GeneralSpotifyHistory from './GeneralSpotifyHistory';
 import AboutPage from './AboutPage';
+import GeneralLogin from './GeneralLogin';
 
 function App() {
   const backendLoginRoute = 'http://localhost:5005/login' // dev -> use nginx for production???
@@ -15,12 +16,13 @@ function App() {
 
   return (
     <div className="App">
-      <Navbar />
+      
       <BrowserRouter>
       <Routes>
-      <Route path="/" element={<><PersonalLogin loginRoute={backendLoginRoute}/><GeneralSpotifyHistory/></>}/>
-      <Route path="profile" element={<><PersonalPage/></>}></Route>
-      <Route path="about" element={<AboutPage />}></Route>
+      <Route path="/"element={<><GeneralLogin loginRoute={backendLoginRoute}/></>}/>
+      <Route path="/homepage" element={<><Navbar loginRoute={backendLoginRoute}/><PersonalLogin loginRoute={backendLoginRoute}/><GeneralSpotifyHistory/></>}/>
+      <Route path="profile" element={<><Navbar loginRoute={backendLoginRoute}/><PersonalPage/></>}></Route>
+      <Route path="about" element={<><Navbar loginRoute={backendLoginRoute}/><AboutPage /></>}/>
       </Routes>
     </BrowserRouter>
     </div>

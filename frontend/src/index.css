@@ -35,7 +35,7 @@ code {
 .navbar a {
   font-size: 16px;
   margin-left: 16px;
-  margin: 32px;
+  margin: 42px;
   text-decoration: none;
   padding: 10px 32px;
   background-color: #95EE93;
@@ -76,6 +76,17 @@ code {
   align-items: center;
   padding: 50px;
   background-size: 5%;
+}
+
+.GeneralLoginBox {
+  margin: 30vh;
+  align-items: center;
+  padding: 50px;
+  background-size: 5%;
+}
+
+#GeneralBox{
+  margin: 24vh;
 }
 
 .PersonalLoginArrowIcon{
@@ -302,4 +313,8 @@ code {
   background-color: #141414;
   box-shadow: 6px 6px #95EE93;
   transform: scale(1.1);
+}
+
+#knapp2{
+  background-image: url(https://i.scdn.co/image/ab67616d0000b27333ccb60f9b2785ef691b2fbc);
 }
