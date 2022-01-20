@@ -25,10 +25,11 @@ CREATE TABLE IF NOT EXISTS artists (
     , rank smallint NOT NULL
     , image_url varchar(100) NULL 
     , link varchar(100) NULL
-    , user_id INT
-    , CONSTRAINT fk_user 
-        FOREIGN KEY(user_id) 
-            REFERENCES users(user_id)
+    , user_id BIGINT
+    , range_term varchar(15)
+    -- , CONSTRAINT fk_user 
+    --     FOREIGN KEY(user_id) 
+    --         REFERENCES users(user_id)
     --, UNIQUE(user_id, rank)
     -- , week smallint NULL
     
@@ -42,8 +43,9 @@ CREATE TABLE IF NOT EXISTS tracks (
     , rank smallint NOT NULL
     , image_url varchar(100) NULL 
     , link varchar(100) NULL
-    , user_id INT
-    , CONSTRAINT fk_user FOREIGN KEY(user_id) REFERENCES users(user_id)
+    , user_id BIGINT
+    , range_term varchar(15)
+    -- , CONSTRAINT fk_user FOREIGN KEY(user_id) REFERENCES users(user_id)
     -- , UNIQUE(user_id, rank)
     -- , week smallint NULL
 );

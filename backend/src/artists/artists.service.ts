@@ -16,54 +16,48 @@ import { QueryConfig, QueryResult } from "pg";
     Structure is a bit whacky, should this be a "post" req, and the auth router call this post req once?
 */
 
-export const saveAllArtists = async (access_token, user_id: number): Promise<void> => { 
-    if ( user_id === -1 ) {
-        console.log("NO ID============!!!!!!!!!!")
-        return
-    }
-
-    const params = new URLSearchParams()
-    params.append('time_range', 'short_term')
-    params.append('limit', '25')
-    params.append('offset', '0')
-
-    const artistsresponse: Response = await fetch('https://api.spotify.com/v1/me/top/artists?' + params,
-        {
-            headers: {
-                'Authorization': 'Bearer ' + access_token
-            }
-        })
-    const artistdata = await artistsresponse.json() // artistdata.items: Artists
-
-    const topartists = artistdata.items
-
-    // this is bad code, should not loop like this
-    // should be able to upsert using single query with many values
-    // OR insert with json_populate_recordset or something
+export const saveAllArtists = async (access_token, user_id: number, term: string): Promise<void> => { 
     try {
+        const params = new URLSearchParams()
+        params.append('time_range', term)
+        params.append('limit', '25')
+        params.append('offset', '0')
+
+        const artistsresponse: Response = await fetch('https://api.spotify.com/v1/me/top/artists?' + params,
+            {
+                headers: {
+                    'Authorization': 'Bearer ' + access_token
+                }
+            })
+        const artistdata = await artistsresponse.json() // artistdata.items: Artists
+
+        const topartists = artistdata.items
+        console.log(topartists)
+
+        // this is bad code, should not loop like this
+        // should be able to upsert using single query with many values
+        // OR insert with json_populate_recordset or something
+        
         let count = 1
         for (const artist of topartists) {
             const insertQuery: QueryConfig = {
-                text: "INSERT INTO artists (artist_name, image_url, rank, user_id, link) "
-                    + "VALUES ($1, $2, $3, $4, $5) ",
-                values: [artist.name, artist.images[1].url, count, user_id, artist.external_urls.spotify]
+                text: "INSERT INTO artists (artist_name, image_url, rank, user_id, link, range_term) "
+                    + "VALUES ($1, $2, $3, $4, $5, $6) ",
+                values: [artist.name, artist.images[1].url, count, user_id, artist.external_urls.spotify, term]
             }
             const updateQuery: QueryConfig = {
-                text: "UPDATE artists SET artist_name = $1, image_url = $2, link = $3 WHERE user_id = $4 AND rank = $5 RETURNING artist_name",
-                values: [artist.name, artist.images[1].url, artist.external_urls.spotify, user_id, count]
+                text: "UPDATE artists SET artist_name = $1, image_url = $2, link = $3 WHERE user_id = $4 AND rank = $5 AND range_term = $6 RETURNING artist_name",
+                values: [artist.name, artist.images[1].url, artist.external_urls.spotify, user_id, count, term]
             }
-            console.log(insertQuery.values[2]);
-                
             const updres = await pool.query(updateQuery)
             console.log(updres);
             
+
             if (updres.rowCount === 0)
             {
                 const insres = await pool.query(insertQuery)
                 if (insres.rowCount !== 0) console.log("inserted artist");
-                
             }
-
             count++
         }
     } catch (error) {

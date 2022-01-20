@@ -20,8 +20,9 @@ export const tracksRouter = express.Router();
 
 // GET artists
 
-tracksRouter.get("/", async (req: Request, res: Response) => {
+tracksRouter.get("/:term", async (req: Request, res: Response) => {
     try {
+        const term = req.params.term
         const { userName } = req.session
         if (!userName) {
             return res.status(401).send("not authorized")
@@ -34,11 +35,10 @@ tracksRouter.get("/", async (req: Request, res: Response) => {
         const userResult: QueryResult = await pool.query(userQuery)
 
         const tracksQuery: QueryConfig = {
-            text: "SELECT * FROM tracks WHERE user_id = $1",
-            values: [ userResult.rows[0].user_id ]
+            text: "SELECT * FROM tracks WHERE user_id = $1 AND range_term = $2",
+            values: [ userResult.rows[0].user_id, term ]
         } 
         const tracksResult: QueryResult = await pool.query(tracksQuery)
-        // console.log(artistResult.rows)
 
         res.status(200).send(tracksResult.rows)
     } catch (e) {

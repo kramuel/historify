@@ -22,8 +22,9 @@ export const artistsRouter = express.Router();
 
 // GET artists
 
-artistsRouter.get("/", async (req: Request, res: Response) => {
+artistsRouter.get("/:term", async (req: Request, res: Response) => {
     try {
+        const term = req.params.term
         const { userName } = req.session
         if (!userName) {
             return res.status(401).send("not authorized")
@@ -36,11 +37,10 @@ artistsRouter.get("/", async (req: Request, res: Response) => {
         const userResult: QueryResult = await pool.query(userQuery)
 
         const artistQuery: QueryConfig = {
-            text: "SELECT * FROM artists WHERE user_id = $1",
-            values: [ userResult.rows[0].user_id ]
+            text: "SELECT * FROM artists WHERE user_id = $1 AND range_term = $2",
+            values: [ userResult.rows[0].user_id, term ]
         } 
         const artistResult: QueryResult = await pool.query(artistQuery)
-        // console.log(artistResult.rows)
 
         res.status(200).send(artistResult.rows)
     } catch (e) {

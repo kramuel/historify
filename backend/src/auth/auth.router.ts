@@ -106,8 +106,12 @@ authRouter.get('/callback', async function (req: Request, res: Response) {
 
             // get artists and tracks 
             // ( these should probably be post reqs)
-            await saveAllArtists(access_token, user_id)
-            await saveAllTracks(access_token, user_id)
+            await saveAllArtists(access_token, user_id, 'short_term')
+            await saveAllArtists(access_token, user_id, 'medium_term')
+            await saveAllArtists(access_token, user_id, 'long_term')
+            await saveAllTracks(access_token, user_id, 'short_term')
+            await saveAllTracks(access_token, user_id, 'medium_term')
+            await saveAllTracks(access_token, user_id, 'long_term')
             await saveAllPlaylists(access_token, "SWEDEN")
             await saveAllPlaylists(access_token, "USA")
             await saveAllPlaylists(access_token, "ARGENTINA")

@@ -44,7 +44,7 @@ const GetPublicPlaylist = () => {
 
     useEffect(() => {
 
-        fetch('http://localhost:5005/tracks/:' + playlistCountry, {
+        fetch('http://localhost:5005/playlists/' + playlistCountry, {
             credentials: 'include'
         })
             .then(res => res.json())

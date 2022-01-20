@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
-import {Track, TimeTerm, TimePeriod} from './PersonalPage'
+import { Track, TimeTerm, TimePeriod } from './PersonalPage'
 
-interface Props{
+interface Props {
     rangeTerm: TimeTerm
     timePeriodRange: TimePeriod
 }
 
-const GetTracks = ({rangeTerm, timePeriodRange}: Props) => {
+const GetTracks = ({ rangeTerm, timePeriodRange }: Props) => {
     const [searchParams, setSearchParams] = useSearchParams()
     const [query, setQuery] = useState(searchParams.get("access_token"))
     const [trackList, setTrackList] = useState<Track[]>([])
@@ -17,7 +17,7 @@ const GetTracks = ({rangeTerm, timePeriodRange}: Props) => {
         params.append('limit', '25')
         params.append('offset', '0')
 
-        fetch('http://localhost:5005/tracks/', {
+        fetch('http://localhost:5005/tracks/' + rangeTerm, {
             credentials: 'include'
         }) // credentials
             .then(res => res.json())
@@ -42,20 +42,20 @@ const GetTracks = ({rangeTerm, timePeriodRange}: Props) => {
             .catch(err => console.error(err))
     }, [rangeTerm]
     )
-    return(
-    <div className="PersonalGraphCapsule">
-                <div className="GraphList">
-                    <h3>Your Top Tracks {timePeriodRange}</h3>
-                    <div className="imageBoxCapsule">
+    return (
+        <div className="PersonalGraphCapsule">
+            <div className="GraphList">
+                <h3>Your Top Tracks {timePeriodRange}</h3>
+                <div className="imageBoxCapsule">
                     {trackList.map((track, index) => {
                         return (
-                            <div key={index} className="imageDivBox" onClick={()=> window.open(track.link + "?si=8f0fefabbde14156", "_blank")}> <p>{index + 1}. {track.name} - {track.artistname}</p><img className='imageDiv' src={track.image} /></div>
+                            <div key={index} className="imageDivBox" onClick={() => window.open(track.link + "?si=8f0fefabbde14156", "_blank")}> <p>{index + 1}. {track.name} - {track.artistname}</p><img className='imageDiv' src={track.image} /></div>
                         )
                     })}
                 </div>
             </div>
-     </div>
-     )
+        </div>
+    )
 }
 
 export default GetTracks;

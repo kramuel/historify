@@ -17,7 +17,7 @@ const GetArtists = ({rangeTerm, timePeriodRange}: Props) => {
         params.append('limit', '25')
         params.append('offset', '0')
         
-            fetch('http://localhost:5005/artists/', {
+            fetch('http://localhost:5005/artists/' + rangeTerm, {
                 credentials: 'include'
             }) // credentials
             .then(res => res.json())
