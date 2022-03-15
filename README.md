@@ -8,6 +8,4 @@ backend is -> node
 
 frontend is -> react
 
-connected with nginx
-
 and docker for development
