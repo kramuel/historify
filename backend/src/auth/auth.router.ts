@@ -45,7 +45,7 @@ authRouter.get("/login", async (req: Request, res: Response) => {
 
         const state: string = generateRandomString(16);
         const scope: string = 'user-top-read';
-        res.cookie(stateKey, state, {  maxAge: 20000 }); // httponly no work?
+        res.cookie(stateKey, state, {  maxAge: 20000 });
 
         const params = new URLSearchParams()
         params.append('response_type', 'code')
@@ -117,17 +117,6 @@ authRouter.get('/callback', async function (req: Request, res: Response) {
                 saveAllPlaylists(access_token, "GLOBAL")])
 
             console.log(saveingtoDB);
-            
-            // await saveAllArtists(access_token, user_id, 'short_term')
-            // await saveAllArtists(access_token, user_id, 'medium_term')
-            // await saveAllArtists(access_token, user_id, 'long_term')
-            // await saveAllTracks(access_token, user_id, 'short_term')
-            // await saveAllTracks(access_token, user_id, 'medium_term')
-            // await saveAllTracks(access_token, user_id, 'long_term')
-            // await saveAllPlaylists(access_token, "SWEDEN")
-            // await saveAllPlaylists(access_token, "USA")
-            // await saveAllPlaylists(access_token, "ARGENTINA")
-            // await saveAllPlaylists(access_token, "GLOBAL")
 
             storeSessionUserName(req, user_name)
             res.redirect("http://localhost:3005/profile")

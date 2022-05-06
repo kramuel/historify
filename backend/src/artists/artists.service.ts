@@ -2,8 +2,6 @@
  * Data Model Interfaces
  */
 
-import { Artist } from "./artist.interface";
-import { Artists } from "./artists.interface";
 import pool from "../db";
 import fetch from "cross-fetch";
 import { QueryConfig, QueryResult } from "pg";
@@ -29,7 +27,7 @@ export const saveAllArtists = async (access_token, user_id: number, term: string
                     'Authorization': 'Bearer ' + access_token
                 }
             })
-        const artistdata = await artistsresponse.json() // artistdata.items: Artists
+        const artistdata = await artistsresponse.json() 
 
         const topartists = artistdata.items
 
@@ -69,50 +67,8 @@ export const saveAllArtists = async (access_token, user_id: number, term: string
     }
 }
 
-// export const find = async (id: number): Promise<Artist> => artists[id];
-
-// use this for creating something ( an artist/user/whatever perhaps) 
-// to be saved in database!! not this key-value-pair-list
-
-// export const create = async (newArtist: Artist): Promise<Artist> => {
-//     const id = new Date().valueOf();
-
-//     artists[id] = {
-//         // id, // if i would have used BaseItem etc
-//         ...newArtist,
-//     };
-
-//     return artists[id];
-// };
-
-
-// same shit but for update ( CRUD )
+// PUT
 
 // UPDATE
 
-// export const update = async (
-//     id: number,
-//     itemUpdate: BaseItem
-//   ): Promise<Item | null> => {
-//     const item = await find(id);
-  
-//     if (!item) {
-//       return null;
-//     }
-  
-//     items[id] = { id, ...itemUpdate };
-  
-//     return items[id];
-//   };
-
 // DELETE
-
-// export const remove = async (id: number): Promise<null | void> => {
-//     const item = await find(id);
-  
-//     if (!item) {
-//       return null;
-//     }
-  
-//     delete items[id];
-//   };
