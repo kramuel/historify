@@ -40,7 +40,7 @@ export const saveAllTracks = async (access_token: string, user_id: number, term:
 
             if (updres.rowCount === 0) {
                 const insres = await pool.query(insertQuery)
-                if (insres.rowCount !== 0) console.log("inserted track with id = ", user_id);
+                if (insres.rowCount !== 0) console.log("inserted track with user_id = ", user_id);
             }
             count++
         }

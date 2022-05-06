@@ -32,7 +32,6 @@ export const saveAllArtists = async (access_token, user_id: number, term: string
         const artistdata = await artistsresponse.json() // artistdata.items: Artists
 
         const topartists = artistdata.items
-        console.log(topartists)
 
         // this is bad code, should not loop like this
         // should be able to upsert using single query with many values
@@ -50,13 +49,18 @@ export const saveAllArtists = async (access_token, user_id: number, term: string
                 values: [artist.name, artist.images[1].url, artist.external_urls.spotify, user_id, count, term]
             }
             const updres = await pool.query(updateQuery)
-            console.log(updres);
+            
             
 
             if (updres.rowCount === 0)
             {
                 const insres = await pool.query(insertQuery)
-                if (insres.rowCount !== 0) console.log("inserted artist");
+                if (insres.rowCount === 0) console.log("DID NOT insert artist");
+                else console.log(`artist at rank: ${count} INSERTED for user_id: ${user_id}`);
+            }
+            else
+            {
+                console.log(`artist at rank: ${count} updated for user_id: ${user_id}`);
             }
             count++
         }

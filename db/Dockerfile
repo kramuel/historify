@@ -1,3 +1,4 @@
 FROM postgres:12.9
-# COPY initdb.pgsql /docker-entrypoint-initdb.d/
+#ADD ./init.sql /docker-entrypoint-initdb.d
+#RUN chmod a+r /docker-entrypoint-initdb.d
 # couldnt get script to work, but used psql cli instead

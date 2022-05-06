@@ -10,6 +10,7 @@ services:
       - $DB_PORT:$DB_PORT
     volumes: 
       - ./db/data:/var/lib/postgresql/data
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
     # mounts a named volume from the containers internal PostgreSQL data dir to the local machine
     # so that data remains between container restarts
     restart: always # force restart the container each time it's spun up (see psql-docker docs)

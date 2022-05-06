@@ -9,38 +9,6 @@ export const storeSessionUserName = (req: Request, userName): void => {
     console.log(`User "${userName}" has been stored in session`);
 }
 
-export const addOrUpdateUserinDB = async (userQueryRows, access_token, refresh_token, user_name): Promise<number> => {
-    let user_id: number = -1
-
-    if (userQueryRows) {
-        // user already exists
-        try {
-            const updatequery: QueryConfig = {
-                text: "UPDATE users SET access_token = $1, refresh_token = $2 WHERE user_name = $3 RETURNING user_name",
-                values: [access_token, refresh_token, user_name]
-            }
-            const updateResult: QueryResult = await pool.query(updatequery)
-
-            user_id = updateResult.rows[0].user_id;
-        } catch (error) {
-            console.error(error);
-        }
-    } else {
-        // add new user
-        try {
-            const insertstring = "INSERT INTO users (user_name, access_token, refresh_token) VALUES ($1, $2, $3) RETURNING user_id"
-            const insertvalues = [user_name, access_token, refresh_token]
-
-            const insertResult: QueryResult = await pool.query(insertstring, insertvalues)
-            console.log("INSERT???==== ", insertResult)
-            user_id = insertResult.rows[0].user_id
-        } catch (error) {
-            console.error(error);
-        }
-    }
-    return user_id;
-}
-
 export const getUserId = async (access_token: string, refresh_token: string, user_name: string): Promise<number> => {
 
     // check if user < 0 or does error catch if user problems query form db??
@@ -61,4 +29,44 @@ export const getUserId = async (access_token: string, refresh_token: string, use
         return -1
     }
 
+}
+
+export const addOrUpdateUserinDB = async (userQueryRows, access_token, refresh_token, user_name): Promise<number> => {
+    let user_id: number = -1
+
+    console.log("userqueryrows: ", userQueryRows);
+    console.log("user_name: ", user_name);
+    
+
+    if (userQueryRows) {
+        // user already exists
+        try {
+            const updatequery: QueryConfig = {
+                text: "UPDATE users SET access_token = $1, refresh_token = $2 WHERE user_name = $3 RETURNING user_id",
+                values: [access_token, refresh_token, user_name]
+            }
+            const updateResult: QueryResult = await pool.query(updatequery)
+
+            user_id = updateResult.rows[0].user_id;
+            
+            console.log("user_id: ", user_id);
+            console.log(updateResult);
+
+        } catch (error) {
+            console.error(error);
+        }
+    } else {
+        // add new user
+        try {
+            const insertstring = "INSERT INTO users (user_name, access_token, refresh_token) VALUES ($1, $2, $3) RETURNING user_id"
+            const insertvalues = [user_name, access_token, refresh_token]
+
+            const insertResult: QueryResult = await pool.query(insertstring, insertvalues)
+            console.log("INSERTED NEW USER?: ", insertResult)
+            user_id = insertResult.rows[0].user_id
+        } catch (error) {
+            console.error(error);
+        }
+    }
+    return user_id;
 }

@@ -64,7 +64,6 @@ authRouter.get('/callback', async function (req: Request, res: Response) {
     const code = req.query.code as string;
     const queryState = req.query.state || null;
     const storedState = req.cookies ? req.cookies[stateKey] : null;
-    // console.log("== cookiestate = ", storedState, "|| querystate= ", queryState)
 
     if (queryState === null || storedState !== queryState) {
         res.redirect('/#' + (new URLSearchParams({ 'error': 'state_mismatch' })))
@@ -106,16 +105,29 @@ authRouter.get('/callback', async function (req: Request, res: Response) {
 
             // get artists and tracks 
             // ( these should probably be post reqs)
-            await saveAllArtists(access_token, user_id, 'short_term')
-            await saveAllArtists(access_token, user_id, 'medium_term')
-            await saveAllArtists(access_token, user_id, 'long_term')
-            await saveAllTracks(access_token, user_id, 'short_term')
-            await saveAllTracks(access_token, user_id, 'medium_term')
-            await saveAllTracks(access_token, user_id, 'long_term')
-            await saveAllPlaylists(access_token, "SWEDEN")
-            await saveAllPlaylists(access_token, "USA")
-            await saveAllPlaylists(access_token, "ARGENTINA")
-            await saveAllPlaylists(access_token, "GLOBAL")
+            var saveingtoDB = await Promise.allSettled([saveAllArtists(access_token, user_id, 'short_term'), 
+                saveAllArtists(access_token, user_id, 'medium_term'), 
+                saveAllArtists(access_token, user_id, 'long_term'),
+                saveAllTracks(access_token, user_id, 'short_term'), 
+                saveAllTracks(access_token, user_id, 'medium_term'), 
+                saveAllTracks(access_token, user_id, 'long_term'),
+                saveAllPlaylists(access_token, "SWEDEN"),
+                saveAllPlaylists(access_token, "USA"),
+                saveAllPlaylists(access_token, "ARGENTINA"),
+                saveAllPlaylists(access_token, "GLOBAL")])
+
+            console.log(saveingtoDB);
+            
+            // await saveAllArtists(access_token, user_id, 'short_term')
+            // await saveAllArtists(access_token, user_id, 'medium_term')
+            // await saveAllArtists(access_token, user_id, 'long_term')
+            // await saveAllTracks(access_token, user_id, 'short_term')
+            // await saveAllTracks(access_token, user_id, 'medium_term')
+            // await saveAllTracks(access_token, user_id, 'long_term')
+            // await saveAllPlaylists(access_token, "SWEDEN")
+            // await saveAllPlaylists(access_token, "USA")
+            // await saveAllPlaylists(access_token, "ARGENTINA")
+            // await saveAllPlaylists(access_token, "GLOBAL")
 
             storeSessionUserName(req, user_name)
             res.redirect("http://localhost:3005/profile")

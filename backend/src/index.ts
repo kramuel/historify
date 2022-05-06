@@ -18,7 +18,7 @@ import { playlistsRouter } from './playlists/playlists.router';
  * App Variables
  */
 
-dotenv.config({ path: '/home/kramuel/Projects/historify/.env' })
+dotenv.config({ path: '../../.env' })
 export const PORT: number = parseInt(process.env.API_PORT as string)
 export const client_id: string = process.env.SPOTIFY_CLIENT_ID
 export const client_secret: string = process.env.SPOTIFY_CLIENT_SECRET
@@ -31,9 +31,9 @@ const conString: string = `pg://${process.env.DB_USER}:
 
 export const SelectCountry = {
     SWEDEN: {id: "37i9dQZEVXbLoATJ81JYXz", val: 987987987},
-    GLOBAL: {id: "37i9dQZEVXbMDoHDwVN2tF", val: 123908120},
-    USA: {id: "37i9dQZEVXbLRQDuF5jeBp", val: 145345544},
-    ARGENTINA: {id: "37i9dQZEVXbMMy2roB9myp", val: 878444874}
+    GLOBAL: {id: "37i9dQZEVXbMDoHDwVN2tF", val: 987987986},
+    USA: {id: "37i9dQZEVXbLRQDuF5jeBp", val: 987987985},
+    ARGENTINA: {id: "37i9dQZEVXbMMy2roB9myp", val: 987987984}
 }
 
 /**
@@ -67,7 +67,7 @@ app.use(session({
         secure: false, // https
         httpOnly: true,
         sameSite: true,
-        maxAge: 24 * 60 * 60 * 1000,
+        maxAge: 24 * 60 * 60 * 2,
         
     },
     saveUninitialized: true,
