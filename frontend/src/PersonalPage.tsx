@@ -63,9 +63,16 @@ const PersonalPage = () => {
                 <button id='knapp2' className="ChangeDataButton" onClick={() => {setShowArtists(false); setShowTracks(true)}}>SHOW TRACKS</button>
             </div>
             <div className="TimeTermButtons">
-                <button className={selectedButton===1 ? "GraphListButtonSelected" : "GraphListButton"} onClick={() => OnClickHandler(TimeTerm.SHORT_TERM, TimePeriod.SHORT_TERM)}>Last Month</button>
-                <button className={selectedButton===2 ? "GraphListButtonSelected" : "GraphListButton"} onClick={() => OnClickHandler(TimeTerm.MEDIUM_TERM, TimePeriod.MEDIUM_TERM)}>Last 6 Months</button>
-                <button className={selectedButton===3 ? "GraphListButtonSelected" : "GraphListButton"} onClick={() => OnClickHandler(TimeTerm.LONG_TERM, TimePeriod.LONG_TERM)}>Last Few Years</button>
+                
+                <button className={selectedButton===1 ? "GraphListButtonSelected" : "GraphListButton"} 
+                onClick={() => OnClickHandler(TimeTerm.SHORT_TERM, TimePeriod.SHORT_TERM)}>Last Month</button>
+                
+                <button className={selectedButton===2 ? "GraphListButtonSelected" : "GraphListButton"} 
+                onClick={() => OnClickHandler(TimeTerm.MEDIUM_TERM, TimePeriod.MEDIUM_TERM)}>Last 6 Months</button>
+                
+                <button className={selectedButton===3 ? "GraphListButtonSelected" : "GraphListButton"} 
+                onClick={() => OnClickHandler(TimeTerm.LONG_TERM, TimePeriod.LONG_TERM)}>Last Few Years</button>
+                
             </div>
             { showTracks ? <GetTracks rangeTerm={rangeTerm} timePeriodRange={timePeriodRange}/> : <GetArtists rangeTerm={rangeTerm} timePeriodRange={timePeriodRange}/>}
         </div>
