@@ -18,7 +18,7 @@ import { playlistsRouter } from './playlists/playlists.router';
  * App Variables
  */
 
-dotenv.config({ path: '/home/kramuel/Projects/historify/.env' })
+dotenv.config({ path: '../../.env' })
 export const PORT: number = parseInt(process.env.API_PORT as string)
 export const client_id: string = process.env.SPOTIFY_CLIENT_ID
 export const client_secret: string = process.env.SPOTIFY_CLIENT_SECRET
