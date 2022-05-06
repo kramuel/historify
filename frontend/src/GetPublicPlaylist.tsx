@@ -1,12 +1,14 @@
 import { useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { Track, TimeTerm, TimePeriod } from './PersonalPage'
+import  PlayListJson  from './PlaylistJson.json'
 
 enum SelectCountry {
     SWEDEN = "SWEDEN",
     GLOBAL = "GLOBAL",
     USA = "USA",
-    ARGENTINA = "ARGENTINA"
+    ARGENTINA = "ARGENTINA",
+    JAPAN = "JAPAN"
 }
 
 enum CountryText {
@@ -16,6 +18,8 @@ enum CountryText {
     ARGENTINA = "in Argentina",
 }
 
+const data = PlayListJson;
+
 const GetPublicPlaylist = () => {
     const [searchParams, setSearchParams] = useSearchParams()
     const [query, setQuery] = useState(searchParams.get("access_token"))
@@ -24,23 +28,25 @@ const GetPublicPlaylist = () => {
     const [countryText, setCountryText] = useState<string>(CountryText.SWEDEN)
     const [selectedButton, setSelectedButton] = useState<number>(1)
 
-    const OnClickHandler = (Country: SelectCountry, CountryText: CountryText) => {
+    const OnClickHandler = (Country: string, CountryText: string, CountryIndex: number) => {
         setPlaylistCountry(Country);
         setCountryText(CountryText);
         if (Country === SelectCountry.SWEDEN) {
-            setSelectedButton(1);
+            setSelectedButton(CountryIndex);
         }
         else if (Country === SelectCountry.GLOBAL) {
-            setSelectedButton(2);
+            setSelectedButton(CountryIndex);
         }
         else if (Country === SelectCountry.USA) {
-            setSelectedButton(3);
+            setSelectedButton(CountryIndex);
         }
         else if (Country === SelectCountry.ARGENTINA) {
-            setSelectedButton(4);
+            setSelectedButton(CountryIndex);
+        }
+        else if (Country === SelectCountry.JAPAN) {
+            setSelectedButton(CountryIndex);
         }
     }
-
 
     useEffect(() => {
 
@@ -74,10 +80,11 @@ const GetPublicPlaylist = () => {
         <div className="PersonalGraphCapsule">
             <div className="GraphList">
                 <div className="TimeTermButtons">
-                    <button className={selectedButton === 1 ? "GraphListButtonSelected" : "GraphListButton"} onClick={() => OnClickHandler(SelectCountry.SWEDEN, CountryText.SWEDEN)}>Sweden</button>
-                    <button className={selectedButton === 2 ? "GraphListButtonSelected" : "GraphListButton"} onClick={() => OnClickHandler(SelectCountry.GLOBAL, CountryText.GLOBAL)}>Globally</button>
-                    <button className={selectedButton === 3 ? "GraphListButtonSelected" : "GraphListButton"} onClick={() => OnClickHandler(SelectCountry.USA, CountryText.USA)}>USA</button>
-                    <button className={selectedButton === 4 ? "GraphListButtonSelected" : "GraphListButton"} onClick={() => OnClickHandler(SelectCountry.ARGENTINA, CountryText.ARGENTINA)}>Argentina</button>
+                    {data.map(d => {
+                        return (
+                            <button key={d.name} className={selectedButton === d.index ? "GraphListButtonSelected" : "GraphListButton"} onClick={() => OnClickHandler(d.name, d.phrase, d.index)}>{d.name}</button>
+                        )
+                    })}
                 </div>
                 <h3>Top Tracks {countryText} </h3>
                 <div className="imageBoxCapsule">

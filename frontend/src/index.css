@@ -233,11 +233,11 @@ code {
   background-position: left;
 }
 
-.GraphListButton:focus {
+/* .GraphListButton:focus {
   color: #95EE93;
   background-color: #141414;
   background-position: left;
-}
+} */
 
 .GraphListButtonSelected{
   color: #95EE93;

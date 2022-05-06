@@ -1,0 +1,25 @@
+[
+    {
+        "name": "SWEDEN",
+        "phrase": "in Sweden",
+        "index" : 1
+    },
+
+    {
+        "name": "USA",
+        "phrase": "in USA",
+        "index" : 2
+    },
+
+    {
+        "name": "GLOBAL",
+        "phrase": "Globally",
+        "index" : 3
+    },
+
+    {
+        "name": "ARGENTINA",
+        "phrase": "in Argentina",
+        "index" : 4
+    }
+]
