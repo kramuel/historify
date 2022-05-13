@@ -3,7 +3,7 @@ interface Props {
 }
 
 const Navbar = ({loginRoute}: Props) => {
-
+  
     return (
       <nav className="navbar">
         <div className="links">

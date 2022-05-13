@@ -1,5 +1,4 @@
 import React, { PureComponent, useEffect, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
 import GetTracks from './GetTracks';
 import GetArtists from './GetArtists';
 
@@ -20,6 +19,7 @@ const PersonalPage = () => {
     const [timePeriodRange, setTimePeriodRange] = useState<TimePeriod>(TimePeriod.SHORT_TERM);
     const [showTracks, setShowTracks] = useState<Boolean>(false);
     const [selectedButton, setSelectedButton] = useState<TimeTerm>(TimeTerm.SHORT_TERM);
+    const [displayName, setDisplayName] = useState<string>();
     
     const OnClickHandler = (Term: TimeTerm, Period: TimePeriod) =>{
         setRangeTerm(Term); 
@@ -27,9 +27,17 @@ const PersonalPage = () => {
         setSelectedButton(Term);
     }
 
+    useEffect(() => {
+        fetch('http://localhost:5005/user', {
+            credentials: 'include'
+        })
+            .then(res => res.text())
+            .then(data => {setDisplayName(data)})
+    },[])
+
     return (
         <div className="GeneralSpotifyHistoryBox">
-            <h3>Erik's Spotify History</h3>
+            <h3>{displayName}'s Spotify History</h3>
             <div className="GeneralSpotifyContentCapsule">
                 <button className="ChangeDataButton" 
                     onClick={() => {setShowTracks(false)}}>

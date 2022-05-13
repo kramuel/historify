@@ -23,8 +23,8 @@ code {
   align-items: center;
   margin: auto;
   background-color:#141414;
-  position: sticky;
-  top: 0;
+  /* position: sticky;
+  top: 0; */
 }
 
 .navbar div {
