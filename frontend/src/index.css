@@ -22,14 +22,19 @@ code {
   display: flex;
   align-items: center;
   margin: auto;
-  background-color:#C0C8BF;
-  border-bottom: 1px solid #f2f2f2;
-  
+  background-color:#141414;
+  position: sticky;
+  top: 0;
 }
 
 .navbar div {
   margin: auto;
   display: inline-block;
+  background-color: #141414;
+}
+
+.links {
+  background-color: #141414;
 }
 
 .navbar a {
@@ -38,9 +43,9 @@ code {
   margin: 42px;
   text-decoration: none;
   padding: 10px 32px;
-  background-color: #95EE93;
+  color: #f2f2f2;
+  background-color: black;
   border-radius: 4px;
-  background: linear-gradient(to left, #FAF6F6 50%, #141414 50%) right;
   background-size: 200%;
   transition: .2s ease-out;
 }

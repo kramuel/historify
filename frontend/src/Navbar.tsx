@@ -3,6 +3,7 @@ interface Props {
 }
 
 const Navbar = ({loginRoute}: Props) => {
+
     return (
       <nav className="navbar">
         <div className="links">
@@ -10,7 +11,6 @@ const Navbar = ({loginRoute}: Props) => {
           <a href="profile">My Profile</a>
           <a href="about">About</a>
         </div>
-        {/* <button className="SpotifyLoginButton">Log in to Spotify</button> */}
       </nav>
     );
   }
