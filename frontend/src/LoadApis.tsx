@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react";
 import GetPublicPlaylist from "./GetPublicPlaylist";
 import { Track } from "./GetTracks";
+import PersonalPage from "./PersonalPage";
 
 export const temp = () => {
 
     const [newPlaylistSweden, setNewplayListSweden] = useState<Track[]>();
     
-    useEffect(() => {
 
+
+    useEffect(() => {
         fetch('http://localhost:5005/playlists/' + 'SWEDEN', {
             credentials: 'include'
         })
@@ -31,4 +33,7 @@ export const temp = () => {
             .catch(err => console.error(err))
     }, [])
     
+    return(
+        <PersonalPage />
+    )
 }
